@@ -23,7 +23,7 @@ This folder contains only public information. What you type into an AI tool, and
 ARCTIC's own models (the LiteLLM service) are approved by GSU's AI Committee for university data that isn't regulated. First set up OpenCode with them by following [Using OpenCode with ARCTIC's AI Models](https://arcwiki.rs.gsu.edu/en/LiteLLM/OpenCode). Then install this skill:
 
 ```bash
-git clone https://github.com/arctic-gsu/arctic-hpc ~/.config/opencode/skills/arctic-hpc
+git clone https://github.com/arctic-gsu/arctic-hpc-skill ~/.config/opencode/skills/arctic-hpc
 ```
 
 To get updates:
@@ -40,7 +40,7 @@ OpenCode loads the skill when a question is about ARCTIC. You can also ask for i
 
 These assistants don't load skill folders, but you can give them the same information:
 
-1. Download [`arctic-hpc.zip`](https://github.com/arctic-gsu/arctic-hpc/releases/latest/download/arctic-hpc.zip) and unzip it.
+1. Download [`arctic-hpc.zip`](https://github.com/arctic-gsu/arctic-hpc-skill/releases/latest/download/arctic-hpc.zip) and unzip it.
 2. Create an agent, Gem or notebook in the assistant, following its own help pages.
 3. Add `references/arctic-reference.md` as a knowledge source.
 4. Paste the body of `SKILL.md` (everything after the second `---` line) as the agent's instructions, where the tool has a place for instructions.
@@ -49,13 +49,13 @@ Product menus change often, so this README doesn't list them. Check which GSU li
 
 ### Other tools
 
-This folder follows the open [Agent Skills](https://agentskills.io) format, so tools that support that format can load it from their skills folder. The release file [`arctic-hpc.zip`](https://github.com/arctic-gsu/arctic-hpc/releases/latest/download/arctic-hpc.zip) holds the `arctic-hpc` folder, for tools that install skills by upload. Before you use any AI tool with data that isn't public, check the [Tool Review Registry](https://technology.gsu.edu/ai/tools/).
+This folder follows the open [Agent Skills](https://agentskills.io) format, so tools that support that format can load it from their skills folder. The release file [`arctic-hpc.zip`](https://github.com/arctic-gsu/arctic-hpc-skill/releases/latest/download/arctic-hpc.zip) holds the `arctic-hpc` folder, for tools that install skills by upload. Before you use any AI tool with data that isn't public, check the [Tool Review Registry](https://technology.gsu.edu/ai/tools/).
 
 ## Report a problem
 
 If the skill gives wrong or outdated ARCTIC information:
 
-- Open an issue at https://github.com/arctic-gsu/arctic-hpc/issues, or
+- Open an issue at https://github.com/arctic-gsu/arctic-hpc-skill/issues, or
 - Open a [Hydra ticket](https://hydra.gsu.edu) assigned to **arctic_developers**, or email arc@gsu.edu.
 
 Say what you asked, what the assistant answered, and which wiki page shows the right answer.
