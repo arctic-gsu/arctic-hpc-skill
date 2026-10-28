@@ -524,4 +524,4 @@ Source: https://arcwiki.rs.gsu.edu/en/home/acids/how-to/slurm, https://arcwiki.r
 | "Run 'conda init' before 'conda activate'" | Conda shell hook not loaded | `eval "$(conda shell.bash hook)"` |
 | "no kernel image is available" with `pytorch/2.7.0` | V100 GPU | Request an L40S, A30 or RTX GPU |
 
-Source: https://arcwiki.rs.gsu.edu/en/hydra/new-page, https://arcwiki.rs.gsu.edu/en/policy/acknowledge, https://arcwiki.rs.gsu.edu/en/home/slurm/troubleshoot, https://arcwiki.rs.gsu.edu/en/home/ssh/authentication-issues, https://arcwiki.rs.gsu.edu/en/iRODS/Troubleshooting
+Source: https://arcwiki.rs.gsu.edu/en/hydra/new-page, https://arcwiki.rs.gsu.edu/en/policy/acknowledge, https://arcwiki.rs.gsu.edu/en/data-transfer/globus/migrate-to-new-home-folder, https://arcwiki.rs.gsu.edu/en/home/slurm/troubleshoot, https://arcwiki.rs.gsu.edu/en/home/ssh/authentication-issues, https://arcwiki.rs.gsu.edu/en/iRODS/Troubleshooting
