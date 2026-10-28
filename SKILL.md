@@ -3,7 +3,7 @@ name: arctic-hpc
 description: "Georgia State University ARCTIC HPC cluster reference: Slurm partitions, GPUs, storage, iRODS, Globus, Elpis, Hemera, modules, AI policy. Use for any ARCTIC or GSU HPC question or job script."
 metadata:
   version: "1.0.0"
-  updated: "2026-10-26"
+  updated: "2026-10-28"
   source: "https://arcwiki.rs.gsu.edu"
 ---
 

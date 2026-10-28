@@ -389,7 +389,7 @@ https://hemera.rs.gsu.edu, GSU login. TReNDS members use https://hemera-staging.
 - **Desktop:** ACIDs Interactive Apps → ACIDs Desktop → set account, hours and cores → Launch. When you finish, click **Delete** on the session.
 - **Interactive apps are for development only.** Don't use them for production runs longer than 1 hour; you can lose data. Run production work as batch jobs.
 - **Job Composer:** Jobs → Job Composer → New Job → From default template, edit, submit.
-- Apps named on the wiki include ACIDs Desktop, JupyterLab, VS Code Server, MATLAB, Stata, RClone Web GUI, Netron, JupyterLab-DeepLabCut and JupyterLab-PySpark. Check Hemera for the current list.
+- Apps (checked 2026-10): ACIDs Desktop, JupyterLab, VS Code Server, MATLAB, Stata, RClone Web GUI, JupyterLab-DeepLabCut and JupyterLab-PySpark. Netron is no longer a Hemera app. Check Hemera for the current list.
 - **MATLAB on Hemera:** set Memory (GB) to 4 × the number of CPUs. For cluster jobs from MATLAB, run `configCluster` once, then `c = parcluster;` and set `c.AdditionalProperties.AccountName`.
 - "Home directory not available" at login means no active allocation.
 
