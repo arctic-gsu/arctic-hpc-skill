@@ -21,4 +21,6 @@ The skill summarizes the ARCTIC wiki. Keep it in step with the wiki and the clus
 2. Bump `metadata.version` and `metadata.updated` in `SKILL.md`, and update "Last verified" at the top of the reference.
 3. Add an entry to `CHANGELOG.md`.
 4. Commit, then tag and push: `git tag v1.1.0 && git push origin main v1.1.0`. The release workflow builds `arctic-hpc.zip` and attaches it to the release; the README's download link always points to the latest one.
+
+   Keep the workflow: it builds the zip from the tagged commit on a clean machine, so nothing from a local copy gets in, and any maintainer can release by pushing a tag. Actions are free for public repositories; if this repository is ever made private, the workflow would need the organization's paid minutes.
 5. OpenCode users get the update with `git pull` in their skill folder.
