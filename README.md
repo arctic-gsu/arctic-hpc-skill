@@ -32,6 +32,8 @@ To get updates:
 git -C ~/.config/opencode/skills/arctic-hpc pull
 ```
 
+The settings on that page let OpenCode read the skill's files without asking and stop it from editing them. If you use your own settings, allow `~/.config/opencode/skills/**` under `external_directory`; otherwise OpenCode asks every time it reads the reference file.
+
 OpenCode loads the skill when a question is about ARCTIC. You can also ask for it by name, for example: "Use the arctic-hpc skill to write a Slurm script for a V100 job."
 
 ### University-licensed assistants (Microsoft Copilot, Copilot Studio, Google Gemini, NotebookLM)
