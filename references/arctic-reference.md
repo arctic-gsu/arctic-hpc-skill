@@ -142,7 +142,7 @@ Source: https://arcwiki.rs.gsu.edu/en/home/elpis/startup-allocation, https://arc
 
 **Nothing is backed up.** ARCTIC doesn't back up HOME, WORK, PROJECT, `/userapp` or `/scratch`, and can't restore deleted or lost files. Keep copies of important data outside ARCTIC.
 
-- **HOME** moved to `/home/user/<first letter>/<username>` with a 100 GB quota in the 2026 home migration. Use `$HOME` or `~` in scripts. Going over quota breaks iRODS logins.
+- **HOME** moved to `/home/user/<first letter>/<username>` with a 100 GB quota in the 2026 home migration (it was `/home/users/<username>`, 25 GB; old pages and scripts may still use that path). Use `$HOME` or `~` in scripts. Going over quota breaks iRODS logins.
 - **WORK and PROJECT** are iRODS storage, mounted only inside Slurm jobs (batch, `srun`, Hemera apps). On a login node, `$IRODS_WORK` and `$IRODS_PROJECT` are empty.
 - **`/userapp`** is visible to all users by default; only the owner can delete files.
 - **Scratch** is temporary: it uses RAID 0, so one disk failure can destroy it, and staff clean it up manually. Slurm sets `$SCRATCH` but doesn't create the folder, and nothing deletes it when the job ends (tested 2026-10). In job scripts:
@@ -169,7 +169,7 @@ Use Globus (https://globus.org, GSU login) for transfers between your computer a
 1. Install Globus Connect Personal on your computer and create a personal collection.
 2. Transfers between your computer and scratch use Globus Flows: in Flows, search "arctic" and choose **ARCTIC Transfer (Personal to Scratch)**, **ARCTIC Transfer (Scratch to Personal)** or **ARCTIC Transfer (Personal to S3)**. The first run asks for consent. Files sent to scratch land in `/scratch/users/<campusid>`.
 3. Flows run in two stages through the **NVME-ARCTIC** collection. If stage two fails, resume it from the File Manager (NVME-ARCTIC → your campus ID → the run's folder → transfer to **ARCTIC-SCRATCH** or your personal collection).
-4. Other collections: **S3-ARCTIC** (object storage), and for the 2026 home migration **ARCTIC-HOME** (old) and **ARCTIC-HOME-NEW** (new).
+4. Other collections: **S3-ARCTIC** (object storage), and for the 2026 home migration **ARCTIC-HOME** (old) and **ARCTIC-HOME-NEW** (new). Don't use the `-INTERNAL` versions of those two.
 
 Hemera's file browser is for viewing files and light transfers; use Globus for large files or many files.
 
@@ -249,8 +249,8 @@ To request new software, see the Application Installation Request page: requests
 
 ### GPU software (tested 2026-10)
 
-- **CUDA compiler:** `module load cuda/12.1` does nothing, because its folder doesn't exist. The V100, L40S and RTX nodes already have `nvcc` 12.0 in `/usr/bin`. The A30 node (`acidsgcn013`) has no `nvcc` on `PATH`; use `/usr/local/cuda/bin/nvcc` there. Login nodes have no `nvcc` and no GPUs: compile in a GPU job.
-- **`pytorch/2.7.0`** (torch 2.7.0 + CUDA 12.8) supports A30, L40S and RTX GPUs but **not V100s**: `torch.cuda.is_available()` returns True on a V100, but GPU work fails. Request `--gres=gpu:L40S:1` (or A30, RTX) with it.
+- **CUDA compiler:** the `cuda` modules 11.4 through 12.1 (including the default, 12.1) do nothing, because their folders don't exist; `cuda/10.2` points into the NVIDIA HPC SDK. The V100, L40S and RTX nodes already have `nvcc` 12.0 in `/usr/bin`. The A30 node (`acidsgcn013`) has no `nvcc` on `PATH`; use `/usr/local/cuda/bin/nvcc` there. Login nodes have no `nvcc` and no GPUs: compile in a GPU job.
+- **`pytorch/2.7.0`** (torch 2.7.0 + CUDA 12.8) supports A30, L40S and RTX GPUs but **not V100s**: `torch.cuda.is_available()` returns True on a V100, but GPU work fails. Request `--gres=gpu:L40S:1` (or A30, RTX) with it. For V100s, make your own venv from `python/3.13.3` and `pip install torch`: the PyPI build (CUDA 12.6) runs on V100s (tested 2026-10).
 - **`tensorflow/2.19.0`** runs GPU work on V100 and L40S.
 - **R torch** (R/4.4.3): the pre-built torch binaries need R 4.5 and don't load. What works, in a GPU job with 4 CPUs, 24 GB and about 10 GB of free space: in R, `options(timeout = 1800)`, `Sys.setenv(MAKEFLAGS = "-j4")`, `install.packages("cuda12.8", repos = c("https://mlverse.r-universe.dev", "https://cloud.r-project.org"))`, then `install.packages("torch")` (about 15 minutes), then `Sys.setenv(TORCH_INSTALL = "1"); library(torch)` (downloads 3.6 GB the first time). Tested on V100 and L40S.
 - Compute nodes have internet access, so `pip install` and `install.packages` work in jobs.
@@ -519,6 +519,7 @@ Source: https://arcwiki.rs.gsu.edu/en/home/acids/how-to/slurm, https://arcwiki.r
 | `-827000 CAT_INVALID_USER` | iRODS login expired | `iinit` |
 | Asked for an iRODS password repeatedly | HOME over quota, or login expired | Free space in HOME, then `iinit` |
 | `$IRODS_WORK` empty | On a login node | Start a Slurm job or Hemera session |
+| Home folder empty after the 2026 migration | Files weren't copied to the new home | In Globus, copy from ARCTIC-HOME to ARCTIC-HOME-NEW, then `iinit` |
 | `cd: $SCRATCH: No such file or directory` | Scratch folder not created | `mkdir -p $SCRATCH` first |
 | "Run 'conda init' before 'conda activate'" | Conda shell hook not loaded | `eval "$(conda shell.bash hook)"` |
 | "no kernel image is available" with `pytorch/2.7.0` | V100 GPU | Request an L40S, A30 or RTX GPU |

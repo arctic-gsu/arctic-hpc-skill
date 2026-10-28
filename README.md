@@ -59,3 +59,7 @@ If the skill gives wrong or outdated ARCTIC information:
 - Open a [Hydra ticket](https://hydra.gsu.edu) assigned to **arctic_developers**, or email arc@gsu.edu.
 
 Say what you asked, what the assistant answered, and which wiki page shows the right answer.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

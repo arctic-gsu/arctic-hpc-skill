@@ -35,8 +35,8 @@ These override generic HPC advice:
 - **Use Globus for large transfers,** not Hemera's file browser.
 - **`scp` and `rsync` need a separate SSH host entry.** `scp` to `arclogin.rs.gsu.edu` fails. Use an `~/.ssh/config` entry such as `arclogin-scp` (`HostName arclogin04.rs.gsu.edu`, `ProxyJump arclogin.rs.gsu.edu`); see the reference's Connecting section.
 - **Researchers submit to `qCPU*`, `qGPU*` and `qMEM*`.** These expose V100, A30, L40S, RTX, TITAN and V100-PCIE-16 GPUs. A100, H100, A40 and L40 GPUs are on TReNDS, for TReNDS members only (`qTRD*`). Adonis GPUs are run by Kubernetes, not Slurm.
-- **`pytorch/2.7.0` doesn't run on V100s.** Use it on A30, L40S or RTX GPUs. `tensorflow/2.19.0` works on V100s.
-- **`module load cuda/12.1` does nothing** (its folder doesn't exist). `nvcc` 12.0 is already in `/usr/bin` on the V100, L40S and RTX nodes; the A30 node has `/usr/local/cuda/bin/nvcc` instead.
+- **`pytorch/2.7.0` doesn't run on V100s.** Use it on A30, L40S or RTX GPUs, or `pip install torch` in your own venv (that build runs on V100s). `tensorflow/2.19.0` works on V100s.
+- **`module load cuda/12.1` (the default) and the other `cuda` modules from 11.4 up do nothing** (their folders don't exist). `nvcc` 12.0 is already in `/usr/bin` on the V100, L40S and RTX nodes; the A30 node has `/usr/local/cuda/bin/nvcc` instead.
 - **The `python/3.x` modules provide `python3`, not `python`, and only the standard library.** Write `python3` after `module load python/...`, and install packages such as pandas in a venv under `/userapp`. A venv made with `--system-site-packages` from the `pytorch/2.7.0` module doesn't see the module's packages (tested 2026-10), so pip downloads PyTorch again.
 - **`module load miniconda3` doesn't set up `conda activate`.** Run `eval "$(conda shell.bash hook)"` first, in job scripts too.
 
