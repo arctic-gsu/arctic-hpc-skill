@@ -304,9 +304,9 @@ The number in a partition name is its maximum run time in hours. Without `--part
 | qCPU24 (default) | 24 h | 1,560 | 30 | 8 | ~9,200 GB | No limit | No limit | No limit |
 | qCPU48 | 48 h | 1,560 | 30 | 8 | ~9,200 GB | 300 | 4 | 1,200 GB |
 | qCPU120 | 120 h | 1,560 | 30 | 8 | ~9,200 GB | 100 | 2 | 400 GB |
-| qGPU24 | 24 h | 1,016 | 18 | 62 | ~8,700 GB | No limit | No limit | No limit |
-| qGPU48 | 48 h | 1,016 | 18 | 62 | ~8,700 GB | 80 | 8 | 600 GB |
-| qGPU120 | 120 h | 1,016 | 18 | 62 | ~8,700 GB | 40 | 4 | 300 GB |
+| qGPU24 | 24 h | 1,016 | 18 | 62 | ~8,500 GB | No limit | No limit | No limit |
+| qGPU48 | 48 h | 1,016 | 18 | 62 | ~8,500 GB | 80 | 8 | 600 GB |
+| qGPU120 | 120 h | 1,016 | 18 | 62 | ~8,500 GB | 40 | 4 | 300 GB |
 | qMEM24 | 24 h | 480 | 8 | 3 | ~10,500 GB | No limit | — | No limit |
 | qMEM48 | 48 h | 480 | 8 | 3 | ~10,500 GB | 128 | — | 4,000 GB |
 | qMEM120 | 120 h | 480 | 8 | 3 | ~10,500 GB | 64 | — | 2,000 GB |
