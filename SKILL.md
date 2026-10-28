@@ -15,7 +15,7 @@ The ARCTIC wiki (https://arcwiki.rs.gsu.edu) is the authoritative source. This s
 
 ## How to use this skill
 
-1. **Read the reference first.** Before you answer an ARCTIC question, read `references/arctic-reference.md`. It has the partition names, GPU types, storage paths, module versions and policies. Don't substitute generic HPC knowledge where ARCTIC has its own values.
+1. **Read the reference first.** Before you answer an ARCTIC question, read `references/arctic-reference.md`. It has the partition names, GPU types, storage paths, module versions and policies. Don't substitute generic HPC knowledge where ARCTIC has its own values. If you can't read the file (for example, a permission prompt was declined), tell the user, and don't answer ARCTIC-specific details from memory.
 2. **Use concrete ARCTIC values.** Write real partition names (`qGPU24`, not "gpu"), real GPU strings (`--gres=gpu:V100:1`), real environment variables (`$SCRATCH`, `$IRODS_WORK`, `$IRODS_PROJECT`) and real module names (`module load python/3.13.3`).
 3. **Say when the reference doesn't cover something.** Don't guess. Point the user to the matching wiki page, or to a Hydra ticket (https://hydra.gsu.edu, assigned to `arctic_developers`) or arc@gsu.edu.
 4. **Cite the wiki.** Each reference section ends with its source pages. Link the relevant page when you answer, so the user can check the current version.
