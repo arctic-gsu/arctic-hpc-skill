@@ -1,0 +1,29 @@
+# On a pushed tag such as v1.0.0, build arctic-hpc.zip (the arctic-hpc/ folder at the zip root,
+# holding only SKILL.md and references/) and attach it to a GitHub release.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build arctic-hpc.zip
+        run: |
+          mkdir -p dist/arctic-hpc
+          cp SKILL.md dist/arctic-hpc/
+          cp -r references dist/arctic-hpc/
+          cd dist && zip -r -X arctic-hpc.zip arctic-hpc
+          unzip -l arctic-hpc.zip
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/arctic-hpc.zip --title "$GITHUB_REF_NAME" --notes "See CHANGELOG.md."
