@@ -124,7 +124,7 @@ Certificates last about **3 months**. Then logins fail with `Permission denied (
       ProxyJump arclogin.rs.gsu.edu
       User <campusid>
   ```
-  `scp results.csv arclogin-scp:~/` copies to ARCTIC; `scp arclogin-scp:~/results.csv .` copies back; `rsync -av myfolder/ arclogin-scp:~/myfolder/` works too. Duo asks for approval each time, as at login. Use Globus for large transfers. Full guide: https://arcwiki.rs.gsu.edu/en/data-transfer/scp-rsync
+  `scp results.csv arclogin-scp:~/` copies to ARCTIC; `scp arclogin-scp:~/results.csv .` copies back; `rsync -av myfolder/ arclogin-scp:~/myfolder/` works too. Duo asks for approval each time, as at login. Use Globus for large transfers.
 
 Source: https://arcwiki.rs.gsu.edu/en/home/elpis/startup-allocation, https://arcwiki.rs.gsu.edu/en/home/ssh/generating-keys, https://arcwiki.rs.gsu.edu/en/home/elpis/signing-keys, https://arcwiki.rs.gsu.edu/en/home/ssh/signing-in, https://arcwiki.rs.gsu.edu/en/home/ssh/authentication-issues, https://arcwiki.rs.gsu.edu/en/home/elpis/resign-key, https://arcwiki.rs.gsu.edu/en/home/acids/how-to/how-to-login-to-acids-cluster-using-vscode, https://arcwiki.rs.gsu.edu/en/home/elpis/add-users
 
@@ -156,7 +156,7 @@ Source: https://arcwiki.rs.gsu.edu/en/home/elpis/startup-allocation, https://arc
 - **PROJECT storage** starts at 200 GB, PIs can request up to 2 TB free, and more costs $200/TB per 3 years.
 - **Data rules (Acceptable Use Policy):** only de-identified data belongs on ARCTIC. Never process or store personally identifiable information there. Report suspected credential breaches to help@gsu.edu or 404-413-HELP (4357).
 
-Source: https://arcwiki.rs.gsu.edu/en/iRODS/Storage, https://arcwiki.rs.gsu.edu/en/backup/backup-policy, https://arcwiki.rs.gsu.edu/en/home/acids/how-to/slurm, https://arcwiki.rs.gsu.edu/en/data-transfer/whats-changed-after-home-migration, https://arcwiki.rs.gsu.edu/en/policy/acceptable-use
+Source: https://arcwiki.rs.gsu.edu/en/iRODS/Storage, https://arcwiki.rs.gsu.edu/en/home/acids/how-to/slurm, https://arcwiki.rs.gsu.edu/en/data-transfer/whats-changed-after-home-migration, https://arcwiki.rs.gsu.edu/en/policy/acceptable-use
 
 ---
 
@@ -167,9 +167,14 @@ Source: https://arcwiki.rs.gsu.edu/en/iRODS/Storage, https://arcwiki.rs.gsu.edu/
 Use Globus (https://globus.org, GSU login) for transfers between your computer and ARCTIC.
 
 1. Install Globus Connect Personal on your computer and create a personal collection.
-2. Transfers between your computer and scratch use Globus Flows: in Flows, search "arctic" and choose **ARCTIC Transfer (Personal to Scratch)**, **ARCTIC Transfer (Scratch to Personal)** or **ARCTIC Transfer (Personal to S3)**. The first run asks for consent. Files sent to scratch land in `/scratch/users/<campusid>`.
-3. Flows run in two stages through the **NVME-ARCTIC** collection. If stage two fails, resume it from the File Manager (NVME-ARCTIC → your campus ID → the run's folder → transfer to **ARCTIC-SCRATCH** or your personal collection).
-4. Other collections: **S3-ARCTIC** (object storage), and for the 2026 home migration **ARCTIC-HOME** (old) and **ARCTIC-HOME-NEW** (new). Don't use the `-INTERNAL` versions of those two.
+2. In the Globus File Manager's two-pane view, choose your personal collection in one pane and the ARCTIC collection in the other, select the files, and click **Start** on the side you're sending from. The ARCTIC collections:
+   - **ARCTIC-SCRATCH**: scratch. Files land in `/scratch/users/<campusid>`.
+   - **ARCTIC-HOME-NEW**: HOME. Type the full path `/home/user/<first letter>/<campusid>/` in the Path box.
+   - **S3-ARCTIC**: S3 object storage (add your Osiris keys to the collection's credentials first; see S3 below).
+   - **ARCTIC-HOME**: the old home, only for copying files to ARCTIC-HOME-NEW after the 2026 home migration.
+
+   Don't use the `-INTERNAL` versions of the home collections.
+3. The "ARCTIC Transfer" flows in Globus Flows (Personal to Scratch, Scratch to Personal, Personal to S3) no longer work (November 2026), although older wiki pages still describe them. Use the two-pane view instead.
 
 Hemera's file browser is for viewing files and light transfers; use Globus for large files or many files.
 
@@ -289,7 +294,7 @@ pip install <package>
 
 `module load singularity` or `module load apptainer`. Convert Docker images: `singularity build python.img docker://python:3.10-slim`, or `singularity pull docker://IMAGE` (saves a `.sif`), or `singularity exec docker://IMAGE CMD` (runs without saving). Harbor (`harbor.rs.gsu.edu`) is ARCTIC's private registry for Kubernetes jobs; request a Harbor project with a Hydra ticket, then log in with `docker login harbor.rs.gsu.edu -u '<username>' --password-stdin`.
 
-Source: https://arcwiki.rs.gsu.edu/en/software/software, https://arcwiki.rs.gsu.edu/en/software/load-modules, https://arcwiki.rs.gsu.edu/en/policy/application-installation-request, https://arcwiki.rs.gsu.edu/en/cuda/examples/hello-world, https://arcwiki.rs.gsu.edu/en/python/install-pytorch-package, https://arcwiki.rs.gsu.edu/en/python/install-tensorflow, https://arcwiki.rs.gsu.edu/en/Rstat/installing-torch-package, https://arcwiki.rs.gsu.edu/en/python/Conda, https://arcwiki.rs.gsu.edu/en/python/creating-a-venv, https://arcwiki.rs.gsu.edu/en/docker/running-docker-image-with-singularity, https://arcwiki.rs.gsu.edu/en/harbor/push-docker-image-to-harbor
+Source: https://arcwiki.rs.gsu.edu/en/software/software, https://arcwiki.rs.gsu.edu/en/policy/application-installation-request, https://arcwiki.rs.gsu.edu/en/cuda/examples/hello-world, https://arcwiki.rs.gsu.edu/en/python/install-pytorch-package, https://arcwiki.rs.gsu.edu/en/python/install-tensorflow, https://arcwiki.rs.gsu.edu/en/Rstat/installing-torch-package, https://arcwiki.rs.gsu.edu/en/python/Conda, https://arcwiki.rs.gsu.edu/en/python/creating-a-venv, https://arcwiki.rs.gsu.edu/en/docker/running-docker-image-with-singularity, https://arcwiki.rs.gsu.edu/en/harbor/push-docker-image-to-harbor
 
 ---
 
